@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+	<title>Aggressive Beats NO HEYA</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a href="home.html" class="logo">
+					<span class="symbol"><img src="images/logo.png" alt="" /></span><span class="title">Aggressive Beats</span>
+				</a>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="home.html">Home</a></li>
+				<li><a href="rocket.html">Rocket League</a></li>
+				<li><a href="r6s.html">Rainbow six Siege</a></li>
+				<li><a href="pubg.html">Player Unknowns Battle Ground</a></li>
+				<li><a href="apex.html">Apex Legend</a></li>
+				<li><a href="minecraft.html">Mine Craft</a></li>
+				<li><a href="gta.html">Grand Theft AUTO V</a></li>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>Apex Legend</h1>
+				<span class="image main"><img src="images/pic04.jpg" alt="" /></span>
+
+
+
+
+				<script type="text/javascript">
+					var CLIENT_ID = '4452779868-jh2fuhgdlq941f80t7thia0q7lg95qtl.apps.googleusercontent.com';
+					var SCOPES = 'https://www.googleapis.com/auth/drive';
+
+					/**
+					 * Called when the client library is loaded to start the auth flow.
+					 */
+					function handleClientLoad() {
+						window.setTimeout(checkAuth, 1);
+					}
+
+					/**
+					 * Check if the current user has authorized the application.
+					 */
+					function checkAuth() {
+						gapi.auth.authorize({
+							'client_id': CLIENT_ID,
+							'scope': SCOPES,
+							'immediate': true
+						},
+							handleAuthResult);
+					}
+
+					/**
+					 * Called when authorization server replies.
+					 *
+					 * @param {Object} authResult Authorization result.
+					 */
+					function handleAuthResult(authResult) {
+						var authButton = document.getElementById('authorizeButton');
+						var main = document.getElementById('main');
+						authButton.style.display = 'none';
+						main.style.display = 'none';
+						if (authResult && !authResult.error) {
+							// Access token has been successfully retrieved, requests can be sent to the API.
+							main.style.display = 'block';
+							var btn = document.getElementById('saveBtn');
+							btn.onclick = writeFile;
+							//main.onchange = uploadFile;
+						} else {
+							// No access token could be retrieved, show the button to start the authorization flow.
+							authButton.style.display = 'block';
+							authButton.onclick = function () {
+								gapi.auth.authorize({
+									'client_id': CLIENT_ID,
+									'scope': SCOPES,
+									'immediate': false
+								},
+									handleAuthResult);
+							};
+						}
+					}
+
+					/**
+					 * Start the file upload.
+					 *
+					 * @param {Object} evt Arguments from the file selector.
+					 */
+					function writeFile(evt) {
+						gapi.client.load('drive', 'v2', function () {
+							alert("sww")
+							//var file = evt.target.files[0];
+							var fileName = document.getElementById("fileName").value;
+							var content = document.getElementById("content").value;
+							console.log("fileName = " + fileName);
+							console.log("content = " + content);
+							insertFile(fileName, content);
+						});
+					}
+
+					/**
+					 * Insert new file.
+					 *
+					 * @param {fileName} 保存するファイル名
+					 * @param {content} 保存するファイルの内容
+					 * @param {Function} callback Function to call when the request is complete.
+					 */
+					function insertFile(fileName, content, callback) {
+						const boundary = '-------314159265358979323846';
+						const delimiter = "\r\n--" + boundary + "\r\n";
+						const close_delim = "\r\n--" + boundary + "--";
+
+						var contentType = 'text/plain';
+						var metadata = {
+							'title': fileName,
+							'mimeType': contentType
+						};
+
+						var base64Data = utf8_to_b64(content);
+						var multipartRequestBody = delimiter +
+							'Content-Type: application/json\r\n\r\n' + JSON.stringify(metadata) + delimiter +
+							'Content-Type: ' + contentType + '\r\n' +
+							'Content-Transfer-Encoding: base64\r\n' +
+							'\r\n' + base64Data + close_delim;
+
+						var request = gapi.client.request({
+							'path': '/upload/drive/v2/files',
+							'method': 'POST',
+							'params': {
+								'uploadType': 'multipart'
+							},
+							'headers': {
+								'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
+							},
+							'body': multipartRequestBody
+						});
+						if (!callback) {
+							callback = function (file) {
+								alert("保存しました。");
+								console.log(file)
+							};
+						}
+						request.execute(callback);
+
+					}
+
+					// from http://ecmanaut.blogspot.jp/2006/07/encoding-decoding-utf8-in-javascript.html
+					function utf8_to_b64(str) {
+						return window.btoa(unescape(encodeURIComponent(str)));
+					}
+
+				</script>
+				<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+				<!--Add a file picker for the user to start the upload process -->
+				<div id="main">
+					<p>
+				<label>ファイル名</label>
+				<input type="text" id="fileName">
+				</p>
+					<p>
+				<label>内容</label>
+				<textarea id="content" cols="50" rows="5"></textarea>
+				</p>
+					<p>
+				    <button id="saveBtn">
+				        保存
+				    </button>
+				</p>
+					<input type="button" id="authorizeButton" value="Authorize" />
+				</div>
+
+
+
+
+
+
+				<code>動画をアップロード</code>
+				<form action="upload.php" method="post" enctype="multipart/form-data">
+					<p><input type="file" name="upfile" id="upfile" accept="video/*" /></p>
+					<p><input type="submit" name="save" value="保存" /></p>
+				</form>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<li>&copy; Untitled. All rights reserved</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+</html>
