@@ -1,8 +1,13 @@
+require 'google_drive'
+
+
 require 'bundler/setup'
 Bundler.require
 require 'sinatra/reloader' if development?
 
 get '/' do
+  session = GoogleDrive::Session.from_config('config.json')
+  session.files.each { |file| p file }
   erb :home
 end
 
