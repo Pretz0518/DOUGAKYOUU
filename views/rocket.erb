@@ -12,6 +12,10 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body class="is-preload">
 	<!-- Wrapper -->
@@ -22,7 +26,7 @@
 			<div class="inner">
 
 				<!-- Logo -->
-				<a href="/home" class="logo">
+				<a href="/" class="logo">
 					<span class="symbol"><img src="images/logo.png" alt="" /></span><span class="title">Aggressive Beats</span>
 				</a>
 
@@ -40,7 +44,7 @@
 		<nav id="menu">
 			<h2>Menu</h2>
 			<ul>
-				<li><a href="/home">Home</a></li>
+				<li><a href="/">Home</a></li>
 				<li><a href="/rocket">Rocket League</a></li>
 				<li><a href="/r6s">Rainbow six Siege</a></li>
 				<li><a href="/pubg">Player Unknowns Battle Ground</a></li>
@@ -53,8 +57,30 @@
 		<div id="main">
 			<div class="inner">
 				<h1>Rocket League</h1>
-<iframe src="https://drive.google.com/file/d/1ow3Ym5Zpz4gBnrqSKFlvCMppX1_hu_vT/preview" width="1280" height="720"></iframe>
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/videoseries?list=PLwZ29Rs-SnVEDkBErSEYhWSx3LtVDnmlC" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<script>
+$(function() {
+		$.ajax({
+			type: 'get',
+			url: 'https://www.googleapis.com/youtube/v3/playlistItems', // リクエストURL
+			dataType: 'json',
+			data: {
+				part: 'snippet', // partは必須で指定が必要とのこと。レスポンスで返してもらいたいデータをカンマ区切りで指定する。snippetがあればとりあえず動画を再生するレスポンスが受け取れる。
+				playlistId: 'PLwZ29Rs-SnVEDkBErSEYhWSx3LtVDnmlC', // 再生リストID
+				maxResults: 20, // デフォルトは5件までしか受け取らないので、取得件数を変更
+				key: '{AIzaSyAYwXBFhfyfQSsq41lP43gJ_8Tv1CtieTA}'
+			}
+		}).done(function(response) {
+		response.items.forEach(function(item) {
+				var id = item.snippet.resourceId.videoId;
+				$('#list').append('&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/'+ id +'" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;');
+		});
+		}).fail(function() {
+		});
+	})
+
+</script>
 
 
 

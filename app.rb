@@ -34,3 +34,4 @@ end
 get "/minecraft" do
   erb :minecraft
 end
+
