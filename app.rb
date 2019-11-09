@@ -15,6 +15,12 @@ helpers do
   end
 end
 
+before '/' do
+  if session[:user].nil?
+    redirect '/login'
+  end
+end
+
 get '/login' do
     @logined = params[:failed]
 
@@ -23,6 +29,7 @@ end
 
 get "/password" do
  if  params[:password]=="AGB" then
+  session[:user] = "AGB"
   redirect '/'
 else
   redirect '/login?failed=1'
