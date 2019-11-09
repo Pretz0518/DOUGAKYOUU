@@ -19,8 +19,8 @@ get "/gta" do
   erb :gta
 end
 
-get "/apex" do
-  erb :apex
+get "/mhw" do
+  erb :mhw
 end
 
 get "/pubg" do

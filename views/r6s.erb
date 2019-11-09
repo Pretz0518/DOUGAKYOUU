@@ -12,6 +12,10 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+				<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body class="is-preload">
 	<!-- Wrapper -->
@@ -23,7 +27,7 @@
 
 				<!-- Logo -->
 				<a href="/" class="logo">
-					<span class="symbol"><img src="images/logo.png" alt="" /></span><span class="title">Aggressive Beats</span>
+					<span class="symbol"><img src="images/icon.png" alt="" /></span><span class="title">Aggressive Beats</span>
 				</a>
 
 				<!-- Nav -->
@@ -44,172 +48,40 @@
 				<li><a href="/rocket">Rocket League</a></li>
 				<li><a href="/r6s">Rainbow six Siege</a></li>
 				<li><a href="/pubg">Player Unknowns Battle Ground</a></li>
-				<li><a href="/apex">Apex Legend</a></li>
+				<li><a href="/mhw">Monster Hunter World</a></li>
 				<li><a href="/minecraft">Mine Craft</a></li>
-				<li><a href="/gta">Grand Theft AUTO V</a></li>
+				<li><a href="/gta">Grand Theft Auto V</a></li>
 		</nav>
 
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
 				<h1>Rainbow Six Siege</h1>
-				<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+				<script>
+$(function() {
+		$.ajax({
+			type: 'get',
+			url: 'https://www.googleapis.com/youtube/v3/playlistItems', // リクエストURL
+			dataType: 'json',
+			data: {
+				part: 'snippet', // partは必須で指定が必要とのこと。レスポンスで返してもらいたいデータをカンマ区切りで指定する。snippetがあればとりあえず動画を再生するレスポンスが受け取れる。
+				playlistId: 'PLwZ29Rs-SnVHXPukTwRmpasn-mr8dGgSm', // 再生リストID
+				maxResults: 50, // デフォルトは5件までしか受け取らないので、取得件数を変更
+				key: 'AIzaSyAYwXBFhfyfQSsq41lP43gJ_8Tv1CtieTA'
+			}
+		}).done(function(response) {
+		response.items.forEach(function(item) {
+				var id = item.snippet.resourceId.videoId;
+				console.log(id)
+				$('#list').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/'+ id +'" frameborder="0" allowfullscreen></iframe>');
+		});
+		}).fail(function() {
+		});
+	})
+</script>
 
-
-
-
-				<script type="text/javascript">
-					var CLIENT_ID = '4452779868-jh2fuhgdlq941f80t7thia0q7lg95qtl.apps.googleusercontent.com';
-					var SCOPES = 'https://www.googleapis.com/auth/drive';
-
-					/**
-					 * Called when the client library is loaded to start the auth flow.
-					 */
-					function handleClientLoad() {
-						window.setTimeout(checkAuth, 1);
-					}
-
-					/**
-					 * Check if the current user has authorized the application.
-					 */
-					function checkAuth() {
-						gapi.auth.authorize({
-							'client_id': CLIENT_ID,
-							'scope': SCOPES,
-							'immediate': true
-						},
-							handleAuthResult);
-					}
-
-					/**
-					 * Called when authorization server replies.
-					 *
-					 * @param {Object} authResult Authorization result.
-					 */
-					function handleAuthResult(authResult) {
-						var authButton = document.getElementById('authorizeButton');
-						var main = document.getElementById('main');
-						authButton.style.display = 'none';
-						main.style.display = 'none';
-						if (authResult && !authResult.error) {
-							// Access token has been successfully retrieved, requests can be sent to the API.
-							main.style.display = 'block';
-							var btn = document.getElementById('saveBtn');
-							btn.onclick = writeFile;
-							//main.onchange = uploadFile;
-						} else {
-							// No access token could be retrieved, show the button to start the authorization flow.
-							authButton.style.display = 'block';
-							authButton.onclick = function () {
-								gapi.auth.authorize({
-									'client_id': CLIENT_ID,
-									'scope': SCOPES,
-									'immediate': false
-								},
-									handleAuthResult);
-							};
-						}
-					}
-
-					/**
-					 * Start the file upload.
-					 *
-					 * @param {Object} evt Arguments from the file selector.
-					 */
-					function writeFile(evt) {
-						gapi.client.load('drive', 'v2', function () {
-							alert("sww")
-							//var file = evt.target.files[0];
-							var fileName = document.getElementById("fileName").value;
-							var content = document.getElementById("content").value;
-							console.log("fileName = " + fileName);
-							console.log("content = " + content);
-							insertFile(fileName, content);
-						});
-					}
-
-					/**
-					 * Insert new file.
-					 *
-					 * @param {fileName} 保存するファイル名
-					 * @param {content} 保存するファイルの内容
-					 * @param {Function} callback Function to call when the request is complete.
-					 */
-					function insertFile(fileName, content, callback) {
-						const boundary = '-------314159265358979323846';
-						const delimiter = "\r\n--" + boundary + "\r\n";
-						const close_delim = "\r\n--" + boundary + "--";
-
-						var contentType = 'text/plain';
-						var metadata = {
-							'title': fileName,
-							'mimeType': contentType
-						};
-
-						var base64Data = utf8_to_b64(content);
-						var multipartRequestBody = delimiter +
-							'Content-Type: application/json\r\n\r\n' + JSON.stringify(metadata) + delimiter +
-							'Content-Type: ' + contentType + '\r\n' +
-							'Content-Transfer-Encoding: base64\r\n' +
-							'\r\n' + base64Data + close_delim;
-
-						var request = gapi.client.request({
-							'path': '/upload/drive/v2/files',
-							'method': 'POST',
-							'params': {
-								'uploadType': 'multipart'
-							},
-							'headers': {
-								'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
-							},
-							'body': multipartRequestBody
-						});
-						if (!callback) {
-							callback = function (file) {
-								alert("保存しました。");
-								console.log(file)
-							};
-						}
-						request.execute(callback);
-
-					}
-
-					// from http://ecmanaut.blogspot.jp/2006/07/encoding-decoding-utf8-in-javascript.html
-					function utf8_to_b64(str) {
-						return window.btoa(unescape(encodeURIComponent(str)));
-					}
-
-				</script>
-				<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-				<!--Add a file picker for the user to start the upload process -->
-				<div id="main">
-					<p>
-				<label>ファイル名</label>
-				<input type="text" id="fileName">
-				</p>
-					<p>
-				<label>内容</label>
-				<textarea id="content" cols="50" rows="5"></textarea>
-				</p>
-					<p>
-				    <button id="saveBtn">
-				        保存
-				    </button>
-				</p>
-					<input type="button" id="authorizeButton" value="Authorize" />
+<div id="list"></div>
 				</div>
-
-
-
-
-
-
-				<code>動画をアップロード</code>
-				<form action="upload.php" method="post" enctype="multipart/form-data">
-					<p><input type="file" name="upfile" id="upfile" accept="video/*" /></p>
-					<p><input type="submit" name="save" value="保存" /></p>
-				</form>
-			</div>
 		</div>
 
 		<!-- Footer -->
