@@ -48,6 +48,10 @@ get '/' do
   erb :home
 end
 
+get "/mem" do
+  erb :mem
+end
+
 get "/rocket" do
   erb :rocket
 end
