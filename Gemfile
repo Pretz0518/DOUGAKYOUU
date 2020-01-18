@@ -9,7 +9,6 @@ gem 'sinatra-activerecord'
 gem 'google_drive'
 
 group :development do
-  gem 'sqlite3', '1.4.1'
   gem 'pry'
   gem 'rubocop'
   gem 'rubocop-performance'
