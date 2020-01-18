@@ -72,6 +72,10 @@ get "/r6s" do
   erb :r6s
 end
 
+get "/other" do
+  erb :other
+end
+
 get "/minecraft" do
   erb :minecraft
 end
