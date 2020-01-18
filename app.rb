@@ -48,6 +48,10 @@ get '/' do
   erb :home
 end
 
+get "/mem" do
+  erb :mem
+end
+
 get "/rocket" do
   erb :rocket
 end
@@ -66,6 +70,10 @@ end
 
 get "/r6s" do
   erb :r6s
+end
+
+get "/other" do
+  erb :other
 end
 
 get "/minecraft" do

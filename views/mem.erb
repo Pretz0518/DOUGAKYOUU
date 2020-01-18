@@ -12,10 +12,6 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-				<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
 </head>
 <body class="is-preload">
 	<!-- Wrapper -->
@@ -53,40 +49,81 @@
 				<li><a href="/minecraft">Mine Craft</a></li>
 				<li><a href="/other">Other</a>
 				<li><a href="/signout">Sign Out</a></li>
-				<iframe src="https://discordapp.com/widget?id=467526228274970625&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+			</ul>
+		<iframe src="https://discordapp.com/widget?id=467526228274970625&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
 		</nav>
 
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
-				<h1>Rainbow Six Siege</h1>
-				<script>
-$(function() {
-		$.ajax({
-			type: 'get',
-			url: 'https://www.googleapis.com/youtube/v3/playlistItems', // リクエストURL
-			dataType: 'json',
-			data: {
-				part: 'snippet', // partは必須で指定が必要とのこと。レスポンスで返してもらいたいデータをカンマ区切りで指定する。snippetがあればとりあえず動画を再生するレスポンスが受け取れる。
-				playlistId: 'PLwZ29Rs-SnVHXPukTwRmpasn-mr8dGgSm', // 再生リストID
-				maxResults: 50, // デフォルトは5件までしか受け取らないので、取得件数を変更
-				key: 'AIzaSyAYwXBFhfyfQSsq41lP43gJ_8Tv1CtieTA'
-			}
-		}).done(function(response) {
-		response.items.forEach(function(item) {
-				var id = item.snippet.resourceId.videoId;
-				console.log(id)
-				$('#list').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/'+ id +'" frameborder="0" allowfullscreen></iframe>');
-		});
-		}).fail(function() {
-		});
-	})
-</script>
-
-<div id="list"></div>
-				</div>
+				<header>
+					<h1>Member Info</h1>
+					<p style="font-size:24pt">Hi, my team name is AGB</p>
+				</header>
+				<section class="tiles">
+					<article class="style1">
+						<span class="image">
+							<img src="images/pretz.jpg" alt="" />
+						</span>
+						<a>
+							<h2>Pretz</h2>
+							<div class="content">
+							</div>
+						</a>
+					</article>
+					<article class="style2">
+						<span class="image">
+							<img src="images/toppo.jpg" alt="" />
+						</span>
+						<a>
+							<h2>Toppo</h2>
+							<div class="content">
+							</div>
+						</a>
+					</article>
+					<article class="style3">
+						<span class="image">
+							<img src="images/tkdd.jpg" alt="" />
+						</span>
+						<a>
+							<h2>Tkd</h2>
+							<div class="content">
+							</div>
+						</a>
+					</article>
+					<article class="style4">
+						<span class="image">
+							<img src="images/narou.jpg" alt="" />
+						</span>
+						<a>
+							<h2>Narou 5</h2>
+							<div class="content">
+							</div>
+						</a>
+					</article>
+					<article class="style5">
+						<span class="image">
+							<img src="images/choco.jpg" alt="" />
+						</span>
+						<a>
+							<h2>Choco 3D</h2>
+							<div class="content">
+							</div>
+						</a>
+					</article>
+					<article class="style6">
+						<span class="image">
+							<img src="images/houjin.jpg" alt="" />
+						</span>
+						<a>
+							<h2>Houjin</h2>
+							<div class="content">
+							</div>
+						</a>
+					</article>
+				</section>
+			</div>
 		</div>
-
 		<!-- Footer -->
 		<footer id="footer">
 			<div class="inner">
