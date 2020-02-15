@@ -1,4 +1,4 @@
-ruby '2.6.2'
+ruby '2.6.3'
 source "https://rubygems.org"
 
 gem 'rake'
@@ -13,7 +13,6 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'ruby-debug-ide'
-  gem 'debase'
   gem 'rcodetools'
   gem 'fastri'
 end

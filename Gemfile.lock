@@ -19,9 +19,6 @@ GEM
     backports (3.15.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
-    debase (0.2.3)
-      debase-ruby_core_source (>= 0.10.2)
-    debase-ruby_core_source (0.10.5)
     declarative (0.0.10)
     declarative-option (0.1.0)
     faraday (0.15.4)
@@ -127,7 +124,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (= 5.2.3)
-  debase
   fastri
   google_drive
   pry
